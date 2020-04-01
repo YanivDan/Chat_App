@@ -45,7 +45,7 @@ int server::server_start_run(){
     //Listen for up to 5 requests at a time
     listen(serverSd, 5);
     
-    //Receive a request from client using accept
+    //Receive a request from client using accept 
     sockaddr_in newSockAddr;
     socklen_t newSockAddrSize = sizeof(newSockAddr);
     
@@ -77,8 +77,8 @@ int server::server_start_run(){
             break;
         }
 
-        // Print's the message
-        cout << "["<< GetTimeLocal() <<"] Client: " << this->msg << endl;
+        // Print's the message 
+        cout << "["<< GetTimeLocal() <<"] [IP -"<<inet_ntoa(newSockAddr.sin_addr)<<"] Client: " << this->msg << endl;
         cout << "> ";      
     }
     
