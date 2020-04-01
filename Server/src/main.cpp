@@ -8,12 +8,11 @@
 
 using namespace std;
 
-
+ 
 // Server side - local
 int main(int argc, char *argv[])
 {
-    //Get Port Number AND Max client connections
-    // Need to enter a port number - User input check 
+    // Get Port Number AND Max client connections
     
     argh::parser cmdl(argv);
     string server_port, max_clients;
@@ -21,6 +20,8 @@ int main(int argc, char *argv[])
     // streaming into a string
     cmdl(1) >> server_port; 
     cmdl(2) >>max_clients;
+    
+    // Check that user enterd values
     if(server_port != "" && max_clients != "")
     {
         // Cheacking user input server port
@@ -35,7 +36,6 @@ int main(int argc, char *argv[])
             cout<<"Invalid max clients - enter a number between 1 - 50"<<endl;
             return -1;
         }
-
     }
     else
     {
@@ -43,19 +43,8 @@ int main(int argc, char *argv[])
         return -1;
     }
     
-    
-
-    
-    
-    
-    // Need to enter a port number - User input check 
-    if(argc != 2)
-    {
-        cerr << "Please input a port number :)" << endl;
-        exit(0);
-    }
-    server Server_side(atoi(argv[1]));
-    Server_side.setup_and_open_socket();
-    if (Server_side.server_start_run() == -1) 
-        cout<< "The proccess has ended" <<endl;
+    //Server Server_side(atoi(server_port.c_str()));
+    //if (server_start_run() == -1) 
+     //   cout<< "The proccess has ended error, error number: "<< errno <<endl;
+    return 0;
 }
