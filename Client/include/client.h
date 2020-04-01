@@ -28,7 +28,7 @@ private:
     int server_port = 0;
     
     // Get user input - Create a message buffer
-    string data;
+    string data = "";
     
     // Create a message buffer and set it to 0
     char msg[512] = {0};

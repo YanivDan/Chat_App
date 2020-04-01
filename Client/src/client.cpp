@@ -1,4 +1,4 @@
-#include "client.h"
+#include "../include/client.h"
 
 // Constructor 
 client::client(string usr_serv_ip, int usr_port)
@@ -18,14 +18,13 @@ client::~client()
 int client::Cli_setup_socket(){
     // Setup a socket 
     struct hostent* host = gethostbyname(this->server_ip.c_str()); 
-    sockaddr_in sendSockAddr; 
     
     // Init sockaddr_in struct
-    bzero((char*)&sendSockAddr, sizeof(sendSockAddr)); 
+    bzero((char*)&this->sendSockAddr, sizeof(this->sendSockAddr)); 
     
-    sendSockAddr.sin_family = AF_INET; 
-    sendSockAddr.sin_addr.s_addr = inet_addr(inet_ntoa(*(struct in_addr*)*host->h_addr_list));
-    sendSockAddr.sin_port = htons(this->server_port);
+    this->sendSockAddr.sin_family = AF_INET; 
+    this->sendSockAddr.sin_addr.s_addr = inet_addr(inet_ntoa(*(struct in_addr*)*host->h_addr_list));
+    this->sendSockAddr.sin_port = htons(this->server_port);
     
     // Create a socket
     this->clientSide = socket(AF_INET, SOCK_STREAM, 0);
@@ -38,7 +37,7 @@ int client::Cli_setup_socket(){
 
 int client::CLi_connect(){
     // Attempt connect to the server
-    int statu = connect(this->Cli_setup_socket(), (sockaddr*) &sendSockAddr, sizeof(sendSockAddr));
+    int statu = connect(this->Cli_setup_socket(), (sockaddr*) &this->sendSockAddr, sizeof(this->sendSockAddr));
     if(statu < 0){
             cout<<"[*] Error connecting to socket!"<<endl; 
             return -1;

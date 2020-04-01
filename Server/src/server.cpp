@@ -1,4 +1,4 @@
-#include "server.h"
+#include "../include/server.h"
 
 
 server::server(int usr_input){
@@ -67,9 +67,11 @@ int server::server_start_run(){
         
         // Clear the buffer
         memset(&msg, 0, sizeof(msg));
+        
+        // Get the message from the client
         recv(newSd, (char*)&msg, sizeof(msg), 0);
         
-        if(strcmp(msg, "exit"))
+        if(!strcmp(msg, "exit"))
         {
             cout << "Client has quit the session" << endl;
             break;
@@ -77,25 +79,7 @@ int server::server_start_run(){
 
         // Print's the message
         cout << "Client: " << msg << endl;
-        cout << "> ";
-        string data;
-        getline(cin, data);
-        
-        // Clear the buffer
-        memset(&msg, 0, sizeof(msg)); 
-        strcpy(msg, data.c_str());
-        
-
-        // if the server want to quit - he input exit
-        if(data == "exit")
-        {
-            // Send to the client that server has closed the connection
-            send(newSd, (char*)&msg, strlen(msg), 0);
-            break;
-        }
-        
-        // Send the message to client
-        send(newSd, (char*)&msg, strlen(msg), 0);
+        cout << "> ";      
     }
     
     close(newSd);

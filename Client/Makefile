@@ -150,33 +150,6 @@ src/client.cpp.s:
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client.cpp.s
 .PHONY : src/client.cpp.s
 
-src/client_test.o: src/client_test.cpp.o
-
-.PHONY : src/client_test.o
-
-# target to build an object file
-src/client_test.cpp.o:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client_test.cpp.o
-.PHONY : src/client_test.cpp.o
-
-src/client_test.i: src/client_test.cpp.i
-
-.PHONY : src/client_test.i
-
-# target to preprocess a source file
-src/client_test.cpp.i:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client_test.cpp.i
-.PHONY : src/client_test.cpp.i
-
-src/client_test.s: src/client_test.cpp.s
-
-.PHONY : src/client_test.s
-
-# target to generate assembly for a file
-src/client_test.cpp.s:
-	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client_test.cpp.s
-.PHONY : src/client_test.cpp.s
-
 src/main_cl.o: src/main_cl.cpp.o
 
 .PHONY : src/main_cl.o
@@ -216,9 +189,6 @@ help:
 	@echo "... src/client.o"
 	@echo "... src/client.i"
 	@echo "... src/client.s"
-	@echo "... src/client_test.o"
-	@echo "... src/client_test.i"
-	@echo "... src/client_test.s"
 	@echo "... src/main_cl.o"
 	@echo "... src/main_cl.i"
 	@echo "... src/main_cl.s"

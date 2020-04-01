@@ -1,5 +1,6 @@
 #include <iostream>
-#include "client.h"
+#include "../include/client.h"
+
 
 #include <iostream>
 #include <string>
@@ -28,8 +29,6 @@ int main(int argc, char *argv[])
         exit(0); 
     } 
     
-
-
     // Get the IP address and Port number 
     string serverIp = argv[1]; 
     int port = atoi(argv[2]); 
