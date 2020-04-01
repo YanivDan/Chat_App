@@ -34,41 +34,15 @@ sys/time.h
 sys/wait.h
 -
 
-/home/yanivdan/Desktop/prog/Chat_App/Server/src/main_s.cpp
-iostream
--
-server.h
-/home/yanivdan/Desktop/prog/Chat_App/Server/src/server.h
-
 /home/yanivdan/Desktop/prog/Chat_App/Server/src/server.cpp
 ../include/server.h
 /home/yanivdan/Desktop/prog/Chat_App/Server/include/server.h
+../../Shared/timer.h
+/home/yanivdan/Desktop/prog/Chat_App/Shared/timer.h
 
-include/server.h
+/home/yanivdan/Desktop/prog/Chat_App/Shared/timer.h
 iostream
 -
-string
--
-stdio.h
--
-sys/types.h
--
-sys/socket.h
--
-netinet/in.h
--
-arpa/inet.h
--
-stdlib.h
--
-unistd.h
--
-string.h
--
-netdb.h
--
-sys/time.h
--
-sys/wait.h
+ctime
 -
 

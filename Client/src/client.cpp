@@ -57,13 +57,13 @@ int client::Cli_disconnect(){
 
 int client::Cli_send_message(){
     
-    cout<<"-> "<<endl;
+    cout<<"-> ";
     
     // Get user input
     getline(cin, this->data);
     
     // Check if the send func worked
-    if((send(this->clientSide, data.c_str(), sizeof(data.c_str()), 0)) == -1){
+    if((send(this->clientSide, this->data.c_str(), sizeof(this->data.c_str()), 0)) == -1){
         cout << "[*] Error sending the message"<<endl;
         this->Cli_disconnect();
         return -1;
@@ -71,7 +71,6 @@ int client::Cli_send_message(){
     return 0;
 }
     
-
 
 int client::Cli_Start_Run(){
     // A variable to double check and make a secure connection
@@ -92,12 +91,11 @@ int client::Cli_Start_Run(){
             this->CLi_connect();
         }
 
-        // Disconnect function - send to the server
+        // Disconnect function 
         else if (this->data == "Disconnect" && verify_conecction == true){
-            
             verify_conecction = false;
             // Disconnect
-             this->Cli_disconnect();
+            this->Cli_disconnect();
         }
         else if (this->data == "Disconnect" && verify_conecction == false){
             // the client try to disconnect but is already diconnected
@@ -116,7 +114,7 @@ int client::Cli_Start_Run(){
                 this->Cli_disconnect();
             }
             // Send to the server that the client exit
-            send(clientSide, this->data.c_str(), strlen(this->data.c_str()), 0);
+            //send(clientSide, this->data.c_str(), strlen(this->data.c_str()), 0);
             break;
         }
         

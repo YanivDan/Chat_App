@@ -2,6 +2,7 @@
 
 // Include's
 #include <iostream>
+#include "../../Shared/argh.h"
 
 #include "server.h"
 

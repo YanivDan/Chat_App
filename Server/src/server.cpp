@@ -1,5 +1,5 @@
 #include "../include/server.h"
-
+#include "../../Shared/timer.h"
 
 server::server(int usr_input){
     this->port = usr_input;
@@ -37,7 +37,7 @@ void server::setup_and_open_socket(){
         cerr << "Error binding socket" << endl;
         exit(0);
     }
-    cout<< "Waiting for a client"<< endl;
+    cout<< "Waiting for a client to connect"<< endl;
 }
 
 
@@ -59,26 +59,26 @@ int server::server_start_run(){
     }
     cout << "Connected with client!" << endl;
     
+    // Receive a message from the client (listen)
+    cout << "Waiting for client respond" << endl;
     
     while(true)
     {
-        // Receive a message from the client (listen)
-        cout << "Waiting for client" << endl;
         
         // Clear the buffer
-        memset(&msg, 0, sizeof(msg));
+        memset(&this->msg, 0, sizeof(this->msg));
         
         // Get the message from the client
-        recv(newSd, (char*)&msg, sizeof(msg), 0);
+        recv(newSd, (char*)&this->msg, sizeof(this->msg), 0);
         
-        if(!strcmp(msg, "exit"))
+        if(!strcmp(this->msg, "Exit"))
         {
             cout << "Client has quit the session" << endl;
             break;
         }
 
         // Print's the message
-        cout << "Client: " << msg << endl;
+        cout << "["<< GetTimeLocal() <<"] Client: " << this->msg << endl;
         cout << "> ";      
     }
     

@@ -1,12 +1,14 @@
 #include <iostream>
-#include <sys/time.h>
+#include <ctime>
+
 using namespace std;
 
-
-string Get_time_to_present(){
-    // Declaring argument of time() - to print it with the msg
-    time_t my_time = time(NULL); 
-
-    // Return the time
-    char a = time(&my_time);
+string GetTimeLocal() {
+   // current date/time based on current system
+   time_t now = time(0);
+   
+   // convert now to string form
+   char* dt = ctime(&now);
+   string s(dt);
+   return s.substr (11,24);
 }

@@ -6,4 +6,5 @@ CMakeFiles/Client.dir/src/client.cpp.o: src/client.cpp
 
 CMakeFiles/Client.dir/src/main_cl.cpp.o: include/client.h
 CMakeFiles/Client.dir/src/main_cl.cpp.o: src/main_cl.cpp
+CMakeFiles/Client.dir/src/main_cl.cpp.o: /home/yanivdan/Desktop/prog/Chat_App/Shared/argh.h
 
