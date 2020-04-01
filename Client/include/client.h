@@ -14,17 +14,19 @@
 #include <string.h>
 #include <netdb.h>
 #include <sys/uio.h>
+#include <errno.h>
 
+#define DISCONNECT -1
 
 using namespace std;
 
-class client
+class Client
 {
 
 public:
     // Constructor & Discructor ->
-    client(string usr_serv_ip, int usr_port);
-    ~client();
+    Client(string usr_serv_ip, int usr_port);
+    ~Client();
     
     // Public functions ->
     
@@ -43,18 +45,28 @@ private:
     string m_data;
     
     // Create a message buffer and set it to 0
-    char msg[512] = {0};
+    char msg[512];
 
     // Socket int
     int m_clientSide;
     sockaddr_in m_sendSockAddr;
 
     // Private Functions - client use ->
-    int m_setup_socket();
-    int m_send_message();
-    int m_disconnect();
-    int m_connect();
-
+    
+    // Setup the socket
+    int Setup_socket();
+    
+    // Try to connect to the server
+    int Connect_to_server();
+    
+    // Client want to disconnect from the server
+    int Disconnect_from_server();
+    
+    //  Check what the command the client want to do
+    void Check_user_input(string usr_input);
+    
+    // Send the message to the server
+    int Send_message();
 };
 
 #endif

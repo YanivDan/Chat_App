@@ -3,7 +3,6 @@
 // Include's
 #include <iostream>
 #include "argh.h"
-#include <errno.h>
 #include "server.h"
 
 using namespace std;

@@ -226,7 +226,7 @@ int Server::server_start_run(){
                     int byteread = recv(events[i].data.fd, &m_msg, sizeof(m_msg), 0);
                     
                     // Check if their is any bytes
-                    if(byteread > 0)
+                    if(byteread > 0 && strcmp(m_msg, "-1") != 0)
                     {
                         // Prints the client message to the server
                         cout << GetTimeLocal() << "[*] " << events[i].data.fd << " Says: "<< m_msg <<endl;

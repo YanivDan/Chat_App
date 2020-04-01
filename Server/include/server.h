@@ -14,9 +14,8 @@
 #include <netdb.h>
 #include <sys/time.h>
 #include <sys/wait.h>
-#include <stdio.h>     // for fprintf()
-#include <unistd.h>    // for close()
-#include <sys/epoll.h> // for epoll_create1(), epoll_ctl(), struct epoll_event
+#include <sys/epoll.h> // epoll_create1(), epoll_ctl(), struct epoll_event
+#include <errno.h>
 
 #define BUFF_SIZE 10000
 #define EPOLL_WAIT -1
@@ -27,10 +26,11 @@ using namespace std;
 class Server
 {
 public:
+    // Constructor & Discructor ->
     Server(int usr_enter_port, int max_connections);
     ~Server();
     
-    // Public Functions
+    // Public Functions ->
 
     // Function that set up a socket and bind it 
     int setup_and_open_socket();
@@ -58,14 +58,24 @@ private:
     int m_serverSd;
 
     //private functions
+    
+    // Try to connect and create a server socket
     int Accept_connection();
+    
+    // Adds a new client to list
     void Add_a_client(int fd);
+    
+    // Remove a client from list
     void Remove_a_client(int fd);
+    
+    // Function to send messges to all the clients that connected to the server
     void Send_massage(int fd, string s);
+    
+    // Prints all the clients
     void Print_all_clients();
+    
+    // Function that check if the epoll at full capacity
     bool Check_if_client_list_full();
-    int Declineconn();
-
 };
 
 #endif
