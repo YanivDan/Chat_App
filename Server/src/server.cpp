@@ -22,7 +22,7 @@ void server::setup_and_open_socket(){
 
     
     // Open socket with internet address
-    int serverSd = socket(AF_INET, SOCK_STREAM, 0);
+    this->serverSd = socket(AF_INET, SOCK_STREAM, 0);
     if(serverSd < 0)
     {
         cerr << "Error in the the server socket" << endl;
@@ -38,14 +38,12 @@ void server::setup_and_open_socket(){
         exit(0);
     }
     cout<< "Waiting for a client"<< endl;
-    
-    
-    //Listen for up to 5 requests at a time
-    listen(serverSd, 5);
 }
 
 
 int server::server_start_run(){
+    //Listen for up to 5 requests at a time
+    listen(serverSd, 5);
     
     //Receive a request from client using accept
     sockaddr_in newSockAddr;
@@ -71,7 +69,7 @@ int server::server_start_run(){
         memset(&msg, 0, sizeof(msg));
         recv(newSd, (char*)&msg, sizeof(msg), 0);
         
-        if(!strcmp(msg, "exit"))
+        if(strcmp(msg, "exit"))
         {
             cout << "Client has quit the session" << endl;
             break;
@@ -87,6 +85,8 @@ int server::server_start_run(){
         memset(&msg, 0, sizeof(msg)); 
         strcpy(msg, data.c_str());
         
+
+        // if the server want to quit - he input exit
         if(data == "exit")
         {
             // Send to the client that server has closed the connection

@@ -1,0 +1,3 @@
+/home/yanivdan/Desktop/prog/Chat_App/Client/CMakeFiles/rebuild_cache.dir
+/home/yanivdan/Desktop/prog/Chat_App/Client/CMakeFiles/Client.dir
+/home/yanivdan/Desktop/prog/Chat_App/Client/CMakeFiles/edit_cache.dir

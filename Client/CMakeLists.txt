@@ -1,6 +1,8 @@
-
 cmake_minimum_required(VERSION 2.8.9)
-project(Chat)
+project(Chat_App)
+
 include_directories(include)
-set(SOURCES src/main.cpp)
+include_directories(../Shared)
+
+file(GLOB SOURCES "src/*.cpp")
 add_executable(Client ${SOURCES})

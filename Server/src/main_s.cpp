@@ -19,5 +19,6 @@ int main(int argc, char *argv[])
     }
     server Server_side(atoi(argv[1]));
     Server_side.setup_and_open_socket();
-    if (Server_side.server_start_run() == -1) cout<< "The proccess has ended" <<endl;
+    if (Server_side.server_start_run() == -1) 
+        cout<< "The proccess has ended" <<endl;
 }
