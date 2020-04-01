@@ -5,7 +5,7 @@ CMakeFiles/Server.dir/src/main_s.cpp.o: src/main_s.cpp
 CMakeFiles/Server.dir/src/main_s.cpp.o: /home/yanivdan/Desktop/prog/Chat_App/Shared/argh.h
 CMakeFiles/Server.dir/src/main_s.cpp.o: include/server.h
 
-CMakeFiles/Server.dir/src/server.cpp.o: include/server.h
+CMakeFiles/Server.dir/src/server.cpp.o: ../Shared/timer.h
 CMakeFiles/Server.dir/src/server.cpp.o: src/server.cpp
-CMakeFiles/Server.dir/src/server.cpp.o: /home/yanivdan/Desktop/prog/Chat_App/Shared/timer.h
+CMakeFiles/Server.dir/src/server.cpp.o: include/server.h
 

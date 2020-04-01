@@ -25,16 +25,16 @@ private:
 
     // User input - sever ip and port
     string server_ip;
-    int server_port = 0;
+    int server_port;
     
     // Get user input - Create a message buffer
-    string data = "";
+    string data;
     
     // Create a message buffer and set it to 0
     char msg[512] = {0};
 
     // Socket int
-    int clientSide = 0;
+    int clientSide;
     sockaddr_in sendSockAddr;
 
     // Private Functions - client use ->

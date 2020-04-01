@@ -36,6 +36,7 @@ private:
 public:
     server(int usr_enter_port);
     ~server();
+    // add menu
     void setup_and_open_socket();
     int server_start_run();
 

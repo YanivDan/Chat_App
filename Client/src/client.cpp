@@ -46,7 +46,8 @@ int client::CLi_connect(){
 }
 
 int client::Cli_disconnect(){
-    if (close(this->clientSide) == -1)
+    int a = close(this->clientSide);
+    if (close(a) == -1)
     {
         cout << "[*] Error closing the socket"<<endl;
         return -1;

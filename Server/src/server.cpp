@@ -1,5 +1,5 @@
-#include "../include/server.h"
-#include "../../Shared/timer.h"
+#include "server.h"
+#include "timer.h"
 
 server::server(int usr_input){
     this->port = usr_input;
@@ -42,7 +42,7 @@ void server::setup_and_open_socket(){
 
 
 int server::server_start_run(){
-    //Listen for up to 5 requests at a time
+    //Listen for up to 5 requests at a time לשנות למקיסמום חיבורים
     listen(serverSd, 5);
     
     //Receive a request from client using accept 
@@ -68,7 +68,7 @@ int server::server_start_run(){
         // Clear the buffer
         memset(&this->msg, 0, sizeof(this->msg));
         
-        // Get the message from the client
+        // Get the message from the client לבדוק את הערך קבלה שלה
         recv(newSd, (char*)&this->msg, sizeof(this->msg), 0);
         
         if(!strcmp(this->msg, "Exit"))
@@ -76,9 +76,17 @@ int server::server_start_run(){
             cout << "Client has quit the session" << endl;
             break;
         }
+        else if (!strcmp(this->msg, "Connect"))
+        {
+
+        }
+        else if (!strcmp(this->msg, "Disonnect"))
+        {
+
+        }
 
         // Print's the message 
-        cout << "["<< GetTimeLocal() <<"] [IP -"<<inet_ntoa(newSockAddr.sin_addr)<<"] Client: " << this->msg << endl;
+        cout << "["<< GetTimeLocal() <<"] [IP -"<< inet_ntoa(newSockAddr.sin_addr) <<"] Client: " << this->msg << endl;
         cout << "> ";      
     }
     

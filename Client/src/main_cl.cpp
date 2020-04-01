@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../include/client.h"
-#include "../../Shared/argh.h"
+#include "client.h"
+#include "argh.h"
 
 
 #include <iostream>
