@@ -146,7 +146,7 @@ int Server::server_start_run(){
     }
     
     // Create an epoll
-    int epoll_fd = epoll_create1(m_max_connections);
+    int epoll_fd = epoll_create(m_max_connections);
     int epo_wait = 0;
     epoll_event ev_server, events[m_max_connections];
     
@@ -167,20 +167,20 @@ int Server::server_start_run(){
         return -1;
     }
     
+    // Create the first epoll that will listen and then add the cleints connections
+    int epo_cre = epoll_ctl(epoll_fd,  EPOLL_CTL_ADD, m_serverSd, &ev_server);
+    if(epo_cre == -1)
+    {
+        cout<< "Failed to add file descriptor to epoll" <<endl;
+    }
+
     while(true)
     {
-        // Create the first epoll that will listen and then add the cleints connections
-        int epo_cre = epoll_ctl(epoll_fd,  EPOLL_CTL_ADD, m_serverSd, &ev_server);
-        if(epo_cre == -1)
-        {
-            cout<< "Failed to add file descriptor to epoll" <<endl;
-        }
-        
         epo_wait = epoll_wait(epoll_fd, events, m_max_connections, EPOLL_WAIT_TIME);
 
         if (epo_wait == -1)
         {
-            cout << "[*] Failed to on epoll_wait function, error number: " << errno << "\n";
+            cout << "[*] Failed to on epoll_wait function, error number: " << errno <<endl;
             exit(EXIT_FAILURE);
         }
     
@@ -201,19 +201,21 @@ int Server::server_start_run(){
                         ev_server.events = EPOLLIN;
                         ev_server.data.fd = clientsock;
                         epoll_ctl(epoll_fd, EPOLL_CTL_ADD, clientsock, &ev_server);
-
-                        for(int everyone = 0; everyone < m_max_connections; everyone++)
+                        
+                        // Send all the client that a new client has connected
+                        for(int client_id = 0; client_id < m_max_connections; client_id++)
                         {
-                            if((m_client_list[everyone] != clientsock) && (m_client_list[everyone] != 0))
+                            if((m_client_list[client_id] != clientsock) && (m_client_list[client_id] != 0))
                             {
                                 string has_connected_message = "User:" + to_string(clientsock) + " has connected";
-                                Send_massage(m_client_list[everyone], has_connected_message.c_str());
+                                Send_massage(m_client_list[client_id], has_connected_message.c_str());
                             }
                         }
                     }
                     else
                     {
-                        cout << GetTimeLocal() << "[*] At max cappacity, the connection is not approved"<<endl;;
+                        cout << GetTimeLocal() << "[*] At max cappacity, the connection is not approved"<<endl;
+                        cout<<"\n";
                     }
                 }
                 // The client exist and want to send a message
@@ -229,7 +231,11 @@ int Server::server_start_run(){
                     if(byteread > 0 && strcmp(m_msg, "-1") != 0)
                     {
                         // Prints the client message to the server
-                        cout << GetTimeLocal() << "[*] " << events[i].data.fd << " Says: "<< m_msg <<endl;
+                        cout << GetTimeLocal() << "[*] Client number: '" << events[i].data.fd << "' Says: "<< m_msg <<endl;
+                        
+                        // Get Space in printing
+                        cout<<""<<endl;
+
                         for(int j = 0; j < m_max_connections; j++)
                         {
                             if((m_client_list[j] != events[i].data.fd) && (m_client_list[j] != 0))                     
@@ -254,7 +260,7 @@ int Server::server_start_run(){
                         // Delete the client from the events
                         epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, &ev_server);
                         
-                        // Call function to remove client 
+                        // Call function to remove client from client list
                         Remove_a_client(events[i].data.fd);
                         
                         // Prints to the server that the client has been disconnected

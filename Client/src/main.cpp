@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
     char buffer[11];
     
     // streaming into a string
-    cmdl(1) >> server_port_input; 
-    cmdl(2) >>server_ip_input;
+    cmdl(2) >> server_port_input; 
+    cmdl(1) >>server_ip_input;
     
     // Check that user enterd 2 values
     // Get the IP address and Port number

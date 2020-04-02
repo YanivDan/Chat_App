@@ -17,7 +17,7 @@
 #include <sys/epoll.h> // epoll_create1(), epoll_ctl(), struct epoll_event
 #include <errno.h>
 
-#define BUFF_SIZE 10000
+#define BUFF_SIZE 30000
 #define EPOLL_WAIT -1
 
 using namespace std;

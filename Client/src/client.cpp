@@ -92,20 +92,18 @@ int Client::Send_message()
 // Check the input the cllient entered
 void Client::Check_user_input(string usr_input)
 {
-    // A variable to double check - make a secure connection
-    bool verify_conecction = false;
-
     // Client Handle user input ->
     // Connect function - send to the server
-    if (m_data == "Connect" && verify_conecction == false)
+    if (usr_input == "Connect" && m_verify_conecction == false)
     {
-        verify_conecction = true;
+        m_verify_conecction = true;
         Connect_to_server();
     }
+    
     // Disconnect function 
-    else if (m_data == "Disconnect" && verify_conecction == true)
+    else if (usr_input == "Disconnect" && m_verify_conecction == true)
     {
-        verify_conecction = false;
+        m_verify_conecction = false;
         // Disconnect
         if(Disconnect_from_server() == -1)
         {
@@ -116,23 +114,24 @@ void Client::Check_user_input(string usr_input)
             }
         }
     }
-    else if (m_data == "Disconnect" && verify_conecction == false)
+    
+    else if (usr_input == "Disconnect" && m_verify_conecction == false)
     {
         // the client try to disconnect but is already diconnected
         cout << "[*] You are already disconnected try connect to the server using: 'Connect'"<<endl;;
     }
 
     // Send function - send to the server
-    else if (m_data == "Send" && verify_conecction == true)
+    else if (usr_input == "Send" && m_verify_conecction == true)
     {
         // Send Function
         Send_message();
     }
 
     // Exit function - send to the server
-    else if (m_data == "Exit")
+    else if (usr_input == "Exit")
     {
-        if(verify_conecction = true)
+        if(m_verify_conecction = true)
         {
             Disconnect_from_server();
         }
@@ -159,6 +158,11 @@ int Client::Start_Run()
         getline(cin, m_data);
         Check_user_input(m_data);
         
+        int byteread = recv(m_clientSide, &m_msg, sizeof(m_msg), 0);
+        if(byteread > 0)
+        {
+            cout<< m_msg <<endl;
+        }
         // Get space between loops
         cout<<"\n";
     }

@@ -45,11 +45,14 @@ private:
     string m_data;
     
     // Create a message buffer and set it to 0
-    char msg[512];
+    char m_msg[512];
 
     // Socket int
     int m_clientSide;
     sockaddr_in m_sendSockAddr;
+    
+    // A variable to double check - make a secure connection
+    bool m_verify_conecction = false;
 
     // Private Functions - client use ->
     
