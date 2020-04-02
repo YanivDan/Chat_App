@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
     if(server_port != "" && max_clients != "")
     {
         // Cheacking user input server port
-        if(atoi(server_port.c_str()) < 1000 && atoi(server_port.c_str()) > 10000)
+        if(atoi(server_port.c_str()) < 1000 || atoi(server_port.c_str()) > 10000)
         {
             cout<<"Invalid port number - enter a number between 1000 - 10,000"<<endl;
             return -1;
         }
         // Cheacking user input server port
-        if(atoi(max_clients.c_str()) < 0 && atoi(max_clients.c_str()) > 50)
+        if(atoi(max_clients.c_str()) < 0 || atoi(max_clients.c_str()) > 50)
         {
             cout<<"Invalid max clients - enter a number between 1 - 50"<<endl;
             return -1;
@@ -42,8 +42,8 @@ int main(int argc, char *argv[])
         return -1;
     }
     
-    //Server Server_side(atoi(server_port.c_str()));
-    //if (server_start_run() == -1) 
-     //   cout<< "The proccess has ended error, error number: "<< errno <<endl;
+    Server Server_side(atoi(server_port.c_str()), atoi(max_clients.c_str()));
+    if (Server_side.server_start_run() == -1) 
+        cout<< "The proccess has ended error, error number: "<< errno <<endl;
     return 0;
 }

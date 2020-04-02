@@ -24,18 +24,39 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     // Check if the user input 2 things: IP address, Port number
-    if(argc != 3)
-    {
-        cerr << "Usage: ip_address port" << endl;
-        exit(0); 
-    } 
+    argh::parser cmdl(argv);
+    string server_port_input, server_ip_input;
+    char buffer[11];
     
-    // Get the IP address and Port number 
-    string serverIp = argv[1]; 
-    int port = atoi(argv[2]); 
+    // streaming into a string
+    cmdl(1) >> server_port_input; 
+    cmdl(2) >>server_ip_input;
+    
+    // Check that user enterd 2 values
+    // Get the IP address and Port number
+    if(server_port_input != "" && server_ip_input != "")
+    {
+        // Cheacking user input client port
+        if(atoi(server_port_input.c_str()) < 1000 || atoi(server_port_input.c_str()) > 10000)
+        {
+            cout<<"Invalid port number - enter a number between 1000 - 10,000! Got: "<< server_port_input<<endl;
+            return -1;
+        }
+        // Cheacking user input client ip
+        if(inet_pton(AF_INET, server_ip_input.c_str(), &buffer) != 1)
+        {
+            cout << "Must provide a valid IP address value! Got '" << server_ip_input << "'" <<endl;
+            return -1;
+        }
+    }
+    else
+    {
+        cout<<"Wrong input - please enter a input"<<endl;
+        return -1;
+    } 
 
-    client local(serverIp, port);
-    local.start_Run();
+    Client local(server_ip_input, atoi(server_port_input.c_str()));
+    local.Start_Run();
     
     
     cout<< "Connection closed" <<endl;

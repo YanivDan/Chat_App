@@ -38,6 +38,7 @@ int Client::Setup_socket()
     return m_clientSide;
 }
 
+// Ateempt to connect to the server
 int Client::Connect_to_server()
 {
     // Attempt connect to the server
@@ -50,6 +51,7 @@ int Client::Connect_to_server()
     cout << "[*] Connected to the server!" << endl;
 }
 
+// Dusconnect from the server function
 int Client::Disconnect_from_server()
 {
     int a = close(m_clientSide);
@@ -61,7 +63,7 @@ int Client::Disconnect_from_server()
     return 0;
 }
 
-
+// Send a message to the server function
 int Client::Send_message()
 {
     
@@ -85,7 +87,9 @@ int Client::Send_message()
     }
     return 0;
 }
-    
+
+
+// Check the input the cllient entered
 void Client::Check_user_input(string usr_input)
 {
     // A variable to double check - make a secure connection
@@ -132,7 +136,8 @@ void Client::Check_user_input(string usr_input)
         {
             Disconnect_from_server();
         }
-        // Exit  client -- צריך להשלים ------------------
+        // Exit  client
+        exit(0);
     }
         
     // User input an unknown command
@@ -143,7 +148,7 @@ void Client::Check_user_input(string usr_input)
 }
 
 // Main function to run the client
-int Client::start_Run()
+int Client::Start_Run()
 {
     // While loop to run as the client start
     while(true)

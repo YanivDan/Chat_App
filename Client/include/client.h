@@ -31,7 +31,7 @@ public:
     // Public functions ->
     
     // Function that starts the client
-    int start_Run();
+    int Start_Run();
 
     
 private:
